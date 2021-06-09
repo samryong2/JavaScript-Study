@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window Size</title>
+    
+</head>
+<body>
+
+    <h1>window.screen:<h1 class="screen_width"></h1><h1 class="screen_height"></h1></h1>
+    <h1>window.outer:<h1 class="outer_width"></h1><h1 class="outer_height"></h1></h1>
+    <h1>window.inner:<h1 class="inner_width"></h1><h1 class="inner_height"></h1></h1>
+    <h1>documentElement.clientWidth:<h1 class="client-width"></h1></h1>
+</body>
+<script>
+
+    const screenWidth = document.querySelector(".screen_width");
+    const screenHeight = document.querySelector(".screen_height");
+    const outerWidth = document.querySelector(".outer_width");
+    const outerHeight = document.querySelector(".outer_height");
+    const innerWidth = document.querySelector(".inner_width");
+    const innerHeight = document.querySelector(".inner_height");
+    const clientWidth = document.querySelector(".client-width");
+
+
+    function updateTag() {
+        screenWidth.innerHTML = window.screen.width;
+        screenHeight.innerHTML = window.screen.height;
+        outerWidth.innerHTML = window.outerWidth;
+        outerHeight.innerHTML = window.outerHeight;
+        innerWidth.innerHTML = window.innerWidth;
+        innerHeight.innerHTML = window.innerHeight;
+        clientWidth.innerHTML = document.documentElement.clientWidth;
+    }
+
+    
+    
+    window.addEventListener("resize",()=>{
+        updateTag();
+    })
+
+    updateTag();
+</script>
+</html>
