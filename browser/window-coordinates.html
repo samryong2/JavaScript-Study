@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>window-coordinates</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: bisque;
+            margin: 5px 0;
+        }
+        .hi{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div class="hi"></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+</body>
+<script>
+    const target = document.querySelector(".hi");
+    
+    target.addEventListener("click",(event)=>{
+        const rectc = target.getBoundingClientRect();
+        console.log(rectc);
+        console.log("client : "+event.clientX+", "+event.clientY);
+        console.log("page : "+event.pageX+", "+event.pageY);
+    
+    })
+</script>
+</html>
