@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- defer : html이 로드되는동안 스크립트를 받고 html로드가 완료되면 스크립트를 실행한다-->
+    <script src="test.js" defer></script>
+</head>
+<body>
+    <script>
+        // only document : html만 로드가 되면 실행 된다
+        window.addEventListener('DOMContentLoaded',()=>{
+            console.log('DOMContentLoaded');
+        })
+        //  css나 image 같은 리소스들이 로드가 된 이후에 작동
+        window.addEventListener('load',()=>{
+            console.log('load');
+        })
+        // 페이지를 나가기 전에 호출
+        window.addEventListener('beforeunload',()=>{
+            console.log('beforeunload');
+        })
+        // 리소스가 unloaded가 되었을 때
+        window.addEventListener('unload',()=>{
+            console.log('unload');
+        })
+    </script>
+</body>
+</html>
