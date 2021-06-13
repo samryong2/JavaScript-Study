@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./007.js" defer></script>
+    <style>
+        .pointer-box{
+            position: absolute;
+            height: 100px;
+            width: 200px;
+            margin: 0;
+            color: blanchedalmond;
+            background-color: cadetblue;
+        }
+
+        html{
+            min-height: 100vh;
+            min-width: 100%;
+        }
+        body{
+            height: 100vh;
+            width: 100vw;
+            background-color: black;
+        }
+
+        .x-line{
+            position: absolute;
+            top: 50%;
+            background-color: bisque;
+            width: 100%;
+            height: 1px;
+        }
+
+        .y-line{
+            position: absolute;
+            height: 100%;
+            left: 50%;
+            width: 1px;
+            background-color: blanchedalmond;
+        }
+        .target{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="x-line"></div>
+    <div class="y-line"></div>
+    <img class="target" src="../img/target.png" alt="">
+    <span class="pointer-box" id="screen-log"></sapn>
+
+</body>
+   
+</html>
