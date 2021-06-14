@@ -21,8 +21,7 @@ addEventListener('load',()=>{
     
         yLine.style.transform = `translateX(${e.clientX}px)`;
         xLine.style.transform = `translateY(${e.clientY}px)`;
-        target.style.transform = 
-        `translate(${e.clientX}px, ${e.clientY})`;
+        target.style.transform = `translate(${e.clientX - targetHalfWidth}px, ${e.clientY - targetHalfHeigt}px)`;
         
         screenLog.style.transform = `translate(${e.clientX+20}px, ${e.clientY+20}px)`;
     });
