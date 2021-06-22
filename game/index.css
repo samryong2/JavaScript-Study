@@ -62,7 +62,7 @@ i{
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    visibility: hidden;
 }
 
 .carrot-count{
@@ -73,6 +73,7 @@ i{
     display: flex;
     justify-content: center;
     align-items: center;
+    visibility: hidden;
 }
 
 
