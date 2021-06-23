@@ -14,8 +14,11 @@ let score = 0;
 let timer = undefined;
 
     
-const timeZone = document.querySelector('.time-zone');
-const carrotCount = document.querySelector('.carrot-count');
+const timeZone = document.querySelector('.time-zone');          // 타이머 dom
+const carrotCount = document.querySelector('.carrot-count');    // 당근 숫자 dom
+const icon = playBtn.querySelector('.fa-play');                 //  
+
+
 playBtn.addEventListener('click',(event)=>{
     if (gameStatus) {
         stopGame();
@@ -34,11 +37,35 @@ function startGame() {
 }
 
 function stopGame() {
-    
+    timerReset();
+    hiddenTimerAndScore();
+    hiddenStopButton();
+}
+
+function timerReset() {
+    timeZone.innerHTML = "1:00";
+    clearInterval(timer);
+}
+
+function hiddenTimerAndScore() {
+    timeZone.style.visibility = 'hidden';
+    carrotCount.style.visibility = 'hidden';
+}
+
+function startGameTimer() {
+    let setTime = 60; // 타이머 시간 
+    timer = setInterval(()=>{
+        timeZone.innerHTML = --setTime;
+    }, 1000);
+}
+
+function hiddenStopButton() {
+    icon.classList.remove('fa-stop');
+    icon.classList.add('fa-play');
 }
 
 function showStopButton() {
-    const icon = playBtn.querySelector('.fa-play');
+    
     icon.classList.add('fa-stop');
     icon.classList.remove('fa-play');
 }
@@ -87,4 +114,4 @@ function randomNumber(min, max) {
 // })
 
 
-initGame();
+// initGame();
