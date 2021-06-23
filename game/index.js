@@ -53,10 +53,20 @@ function hiddenTimerAndScore() {
 }
 
 function startGameTimer() {
-    let setTime = 60; // 타이머 시간 
+    let remainingTimeSec = GAME_DURATION_SEC; // 타이머 시간 
     timer = setInterval(()=>{
-        timeZone.innerHTML = --setTime;
+        if (remainingTimeSec <= 0) {
+            clearInterval(timer);
+            return;
+        }
+        updateTimerText(--remainingTimeSec);
     }, 1000);
+}
+
+function updateTimerText(time) {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    timeZone.innerHTML = `${minutes}:${seconds}`;
 }
 
 function hiddenStopButton() {
