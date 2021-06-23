@@ -3,6 +3,7 @@
 const CARROT_COUNT = 5;
 const BUG_COUNT = 5;
 const CARROT_SIZE = 80;         // 당근 이미지 사이즈
+const GAME_DURATION_SEC = 5;
 
 const section = document.querySelector('.game-section');// 게임 SECTION
 const fieldRect = section.getBoundingClientRect();      // 게임 SECTION RECT
@@ -17,6 +18,10 @@ let timer = undefined;
 const timeZone = document.querySelector('.time-zone');          // 타이머 dom
 const carrotCount = document.querySelector('.carrot-count');    // 당근 숫자 dom
 const icon = playBtn.querySelector('.fa-play');                 //  
+
+const popUp = document.querySelector('.pop-up');
+const popUpText = document.querySelector('.pop-up__text');
+const popUpRefresh = document.querySelector('.pop-up__refresh');
 
 
 playBtn.addEventListener('click',(event)=>{
@@ -39,7 +44,8 @@ function startGame() {
 function stopGame() {
     timerReset();
     hiddenTimerAndScore();
-    hiddenStopButton();
+    hiddenGameButton();
+    showPopUpWithText('REPLAY?');
 }
 
 function timerReset() {
@@ -50,6 +56,11 @@ function timerReset() {
 function hiddenTimerAndScore() {
     timeZone.style.visibility = 'hidden';
     carrotCount.style.visibility = 'hidden';
+}
+
+function showPopUpWithText(text) {
+    popUp.classList.remove('pop-up--hide');
+    popUpText.innerHTML = text;
 }
 
 function startGameTimer() {
@@ -69,7 +80,7 @@ function updateTimerText(time) {
     timeZone.innerHTML = `${minutes}:${seconds}`;
 }
 
-function hiddenStopButton() {
+function hiddenGameButton() {
     icon.classList.remove('fa-stop');
     icon.classList.add('fa-play');
 }
