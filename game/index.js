@@ -20,9 +20,11 @@ const carrotCount = document.querySelector('.carrot-count');    // 당근 숫자
 const icon = playBtn.querySelector('.fa-play');                 //  
 
 const popUp = document.querySelector('.pop-up');
-const popUpText = document.querySelector('.pop-up__text');
+const popUpText = document.querySelector('.pop-up__message');
 const popUpRefresh = document.querySelector('.pop-up__refresh');
 
+
+section.addEventListener('click',onFieldClick)
 
 playBtn.addEventListener('click',(event)=>{
     if (gameStatus) {
@@ -34,7 +36,47 @@ playBtn.addEventListener('click',(event)=>{
     gameStatus = !gameStatus;
 })
 
+popUpRefresh.addEventListener('click',(event)=>{
+    startGame();
+    hidePopUp();
+})
+
+function hidePopUp() {
+    popUp.classList.add('pop-up--hide');
+}
+
+function onFieldClick(event) {
+    if (!gameStatus) {
+        return;
+    }
+    const target = event.target;
+    if (target.matches('.carrot')) {
+        // 당근
+        target.remove();
+        score++;
+        updateScoreBoard();
+        if (score === CARROT_COUNT) {
+            finishGame(true);
+        }
+    }else if (target.matches('.bug')) {
+        // 벌레
+        stopGame();
+        finishGame(false);
+    }
+}
+
+function finishGame(win) {
+    gameStatus = false;
+    hiddenGameButton();
+    showPopUpWithText(win? 'YOU WON' : 'YOU LOST');
+}
+
+function updateScoreBoard() {
+    carrotCount.innerHTML = CARROT_COUNT - score;
+}
+
 function startGame() {
+    gameStatus = true;
     initGame();
     showStopButton();
     showTimerAndScore();
@@ -42,6 +84,7 @@ function startGame() {
 }
 
 function stopGame() {
+    gameStatus = false;
     timerReset();
     hiddenTimerAndScore();
     hiddenGameButton();
@@ -68,6 +111,7 @@ function startGameTimer() {
     timer = setInterval(()=>{
         if (remainingTimeSec <= 0) {
             clearInterval(timer);
+            finishGame(CARROT_COUNT === score);
             return;
         }
         updateTimerText(--remainingTimeSec);
