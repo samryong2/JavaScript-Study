@@ -66,7 +66,6 @@ function onFieldClick(event) {
 }
 
 function finishGame(win) {
-    gameStatus = false;
     hiddenGameButton();
     showPopUpWithText(win? 'YOU WON' : 'YOU LOST');
 }
@@ -76,7 +75,6 @@ function updateScoreBoard() {
 }
 
 function startGame() {
-    gameStatus = true;
     initGame();
     showStopButton();
     showTimerAndScore();
@@ -92,7 +90,7 @@ function stopGame() {
 }
 
 function timerReset() {
-    timeZone.innerHTML = "1:00";
+    timeZone.innerHTML = GAME_DURATION_SEC;
     clearInterval(timer);
 }
 
