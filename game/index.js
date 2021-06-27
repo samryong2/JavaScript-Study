@@ -1,5 +1,7 @@
 'use strict';
 
+import PopUp from "./popup.js";
+
 const CARROT_COUNT = 5;
 const BUG_COUNT = 5;
 const CARROT_SIZE = 80;         // 당근 이미지 사이즈
@@ -25,11 +27,13 @@ const timeZone = document.querySelector('.time-zone');          // 타이머 dom
 const carrotCount = document.querySelector('.carrot-count');    // 당근 숫자 dom
 const icon = playBtn.querySelector('.fa-play');                 //  
 
-const popUp = document.querySelector('.pop-up');
-const popUpText = document.querySelector('.pop-up__message');
-const popUpRefresh = document.querySelector('.pop-up__refresh');
 
 
+const gameFinishBanner = new PopUp();
+
+gameFinishBanner.setClickListener(()=>{
+    startGame();
+})
 section.addEventListener('click',onFieldClick)
 
 playBtn.addEventListener('click',(event)=>{
@@ -38,18 +42,9 @@ playBtn.addEventListener('click',(event)=>{
     }else{
         startGame();
     }
-    gameStatus = !gameStatus;
+    // gameStatus = !gameStatus;
 })
 
-popUpRefresh.addEventListener('click',(event)=>{
-    startGame();
-    hidePopUp();
-    
-})
-
-function hidePopUp() {
-    popUp.classList.add('pop-up--hide');
-}
 
 function onFieldClick(event) {
     if (!gameStatus) {
@@ -83,7 +78,7 @@ function stopSound(sound) {
 }
 
 function finishGame(win) {
-    // gameStatus = false;
+    gameStatus = false;
     if (win) {
         playSound(winSound);
     }else {
@@ -91,7 +86,7 @@ function finishGame(win) {
     }
     hiddenGameButton();
     stopSound(bgSound);
-    showPopUpWithText(win? 'YOU WON' : 'YOU LOST');
+    gameFinishBanner.showPopUpWithText(win? 'YOU WON' : 'YOU LOST');
     timerReset();
 }
 
@@ -100,7 +95,7 @@ function updateScoreBoard() {
 }
 
 function startGame() {
-    // gameStatus = true;
+    gameStatus = true;
     initGame();
     showStopButton();
     showTimerAndScore();
@@ -109,11 +104,12 @@ function startGame() {
 }
 
 function stopGame() {
-    // gameStatus = false;
+    gameStatus = false;
     timerReset();
     hiddenTimerAndScore();
     hiddenGameButton();
-    showPopUpWithText('REPLAY?');
+    gameFinishBanner.showPopUpWithText('REPLAY?');
+    // showPopUpWithText('REPLAY?');
     playSound(alertSound);
 }
 
@@ -127,10 +123,7 @@ function hiddenTimerAndScore() {
     carrotCount.style.visibility = 'hidden';
 }
 
-function showPopUpWithText(text) {
-    popUp.classList.remove('pop-up--hide');
-    popUpText.innerHTML = text;
-}
+
 
 function startGameTimer() {
     let remainingTimeSec = GAME_DURATION_SEC; // 타이머 시간 

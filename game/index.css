@@ -63,6 +63,8 @@ i{
     justify-content: center;
     align-items: center;
     visibility: hidden;
+    user-select: none;
+    cursor: auto;
 }
 
 .carrot-count{
@@ -74,8 +76,9 @@ i{
     justify-content: center;
     align-items: center;
     visibility: hidden;
+    user-select: none;
+    cursor: auto;
 }
-
 
 .game-section{
     position: relative;
@@ -115,4 +118,12 @@ i{
     display: none;
 }
 
+.carrot, .bug{
+    transition: transform 100ms ease-in;
+}
+
+.carrot:hover,
+.bug:hover{
+    transform: scale(1.1);
+}
 
