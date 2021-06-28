@@ -2,6 +2,7 @@
 
 import PopUp from "./popup.js";
 import Field from "./field.js";
+import * as sound from "./sound.js";
 
 const CARROT_COUNT = 5;
 const BUG_COUNT = 5;
@@ -16,24 +17,15 @@ const playBtn = document.querySelector('.play-btn');    // 게임 시작 버튼
 let gameStatus = false;
 let score = 0;
 let timer = undefined;
-
-
-const carrotSound = new Audio('./sound/carrot_pull.mp3');       // 당근 클릭 사운드
-const alertSound = new Audio('./sound/alert.wav');
-const bgSound = new Audio('./sound/bg.mp3');
-const bugSound = new Audio('./sound/bug_pull.mp3');
-const winSound = new Audio('./sound/game_win.mp3');
     
 const timeZone = document.querySelector('.time-zone');          // 타이머 dom
 const carrotCount = document.querySelector('.carrot-count');    // 당근 숫자 dom
 const icon = playBtn.querySelector('.fa-play');                 //  
 
-
-
 const gameFinishBanner = new PopUp();
 const gameField = new Field(CARROT_COUNT,BUG_COUNT);
 
-gameField.setClickListener(onItemClick());
+gameField.setClickListener(onItemClick);
 
 function onItemClick(item) {
     console.log("item : "+item);
@@ -69,26 +61,16 @@ playBtn.addEventListener('click',(event)=>{
 })
 
 
-
-
-function playSound(sound) {
-    sound.currentTime = 0;
-    sound.play();
-}
-
-function stopSound(sound) {
-    sound.pause();
-}
-
 function finishGame(win) {
     gameStatus = false;
     if (win) {
-        playSound(winSound);
+        sound.playWin();
     }else {
-        playSound(bugSound);
+        sound.playBg();
     }
     hiddenGameButton();
-    stopSound(bgSound);
+    sound.stopBg();
+    // stopSound(bgSound);
     gameFinishBanner.showPopUpWithText(win? 'YOU WON' : 'YOU LOST');
     timerReset();
 }
@@ -103,7 +85,8 @@ function startGame() {
     showStopButton();
     showTimerAndScore();
     startGameTimer();
-    playSound(bgSound);
+    // playSound(bgSound);
+    sound.playBg();
 }
 
 function stopGame() {
@@ -112,8 +95,7 @@ function stopGame() {
     hiddenTimerAndScore();
     hiddenGameButton();
     gameFinishBanner.showPopUpWithText('REPLAY?');
-    // showPopUpWithText('REPLAY?');
-    playSound(alertSound);
+    sound.stopBg();
 }
 
 function timerReset() {
@@ -126,14 +108,11 @@ function hiddenTimerAndScore() {
     carrotCount.style.visibility = 'hidden';
 }
 
-
-
 function startGameTimer() {
     let remainingTimeSec = GAME_DURATION_SEC; // 타이머 시간 
     timer = setInterval(()=>{
         if (remainingTimeSec <= 0) {
             clearInterval(timer);
-
             finishGame(CARROT_COUNT === score);
             return;
         }
