@@ -13,13 +13,13 @@ export default class Field{
         this.field = document.querySelector('.game-section');
         this.fieldRect = this.field.getBoundingClientRect();
         // this.onClick = this.onClick.bind(this);
-        this.field.addEventListener('click',(event)=>{ this.onClick(event)});
+        this.field.addEventListener('click',this.onClick);
     }
 
     init(){
         this.field.innerHTML = "";
-        this._addItem('carrot',5,'./img/carrot.png');
-        this._addItem('bug',5,'./img/bug.png');
+        this._addItem('carrot',this.carrotCount,'./img/carrot.png');
+        this._addItem('bug',this.bugCount,'./img/bug.png');
     }
     // 당근과 벌레 생성 함수
     _addItem(className, count, imgPath) {
@@ -44,12 +44,11 @@ export default class Field{
         this.onItemClick = onItemClick;
     }
 
-    onClick(event){
+    onClick= event => {
         const target = event.target;
 
         console.log("target : "+target.className);
         if (target.matches('.carrot')) {
-            // 당근
             target.remove();
             sound.playCarrot();
             this.onItemClick && this.onItemClick('carrot');
