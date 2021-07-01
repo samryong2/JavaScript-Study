@@ -62,6 +62,13 @@ class Game {
         this.icon = this.playBtn.querySelector('.fa-play'); 
     }
 
+    /**
+     *       게임을 승리했을 경우 다음 스테이지로 넘어가는 기능
+     */
+    nextLevel(){
+
+    }
+
     setGameStopListener(onGameStop){
         this.onGameStop = onGameStop;
     }
