@@ -1,5 +1,6 @@
 import {Field, ItemType} from "./field.js";
 import * as sound from "./sound.js";
+import * as level from './level.js';
 
 export const Reason = Object.freeze({
     win: 'win',
@@ -29,6 +30,14 @@ export class GameBuilder {
             this.carrotCount,
             this.bugCount
             )
+    }
+
+        /**
+     *       게임을 승리했을 경우 다음 스테이지로 넘어가는 기능
+     */
+    nextLevel(){
+        level.level1();
+        
     }
 }
 
@@ -60,14 +69,11 @@ class Game {
         this.timeZone = document.querySelector('.time-zone');          // 타이머 dom
         this.gameScore = document.querySelector('.carrot-count');    // 당근 숫자 dom
         this.icon = this.playBtn.querySelector('.fa-play'); 
+
+        this.level = 
     }
 
-    /**
-     *       게임을 승리했을 경우 다음 스테이지로 넘어가는 기능
-     */
-    nextLevel(){
 
-    }
 
     setGameStopListener(onGameStop){
         this.onGameStop = onGameStop;
