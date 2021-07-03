@@ -70,7 +70,7 @@ class Game {
         this.gameScore = document.querySelector('.carrot-count');    // 당근 숫자 dom
         this.icon = this.playBtn.querySelector('.fa-play'); 
 
-        this.level = 
+        
     }
 
 
